@@ -1,0 +1,60 @@
+<div class="col-md-6 offser-md-3">
+    <h3 class="text-center">Edición de actividad</h3>
+    <form  (ngSubmit)="onSubmit()"#actividadForm = "ngForm">
+        <div class="form-group">
+            <label for="">Descripción : </label>
+            <input type="text" class = "form-control" 
+            id = "descripcion" 
+            [(ngModel)] = "actividad.descripcion" 
+            name = "descripcion"
+            required
+            minlength="5"
+            maxlength="500"
+            placeholder="Descripción"
+            #descripcion = "ngModel"
+            >
+            <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                <div *ngIf = "descripcion.errors.required ">
+                    Digite su descripción por favor
+                </div>
+                <div *ngIf = "descripcion.errors.minlength ">
+                    La descripción debe tener por lo minimo 5 caracteres
+                </div>
+                <div *ngIf = "descripcion.errors.maxlength ">
+                    El descripción debe tener como máximo 500 caracteres
+                </div>
+            </div>
+            <label for="">Estado de actividad: </label>
+            <select class="form-select form-control" v-model="estado" placeholder="Seleccione estado">
+              <option disabled value="">--Seleccione--</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+
+       
+            
+            <label class="form-label">Fecha De Finalizacion Estimada:</label>
+            <div class="col-md-6">
+                <input name="fechaEstimada" 
+                type="date" class="form-control"
+                id = "fechaEstimada" 
+                [(ngModel)] = "actividad.fechaEstimada" 
+                name = "fechaEstimada"
+                required required>
+            </div>
+            
+            <label for="">Empleado designado: </label>
+            <select class="form-select form-control" 
+            [(ngModel)]="actividad.empleadoId" 
+              placeholder="Seleccione empleado designado"
+              id="empleadoId"
+              name="empleadoId"
+                >
+                <option disabled value="">--Seleccione--</option>
+              <option *ngFor="let empleado of empleados" [value]="empleado.id_empleado">{{empleado.nombre + ' '+ empleado.apellidos}}</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success" [disabled]="!actividadForm.form.valid">Guardar</button>
+    </form>
+</div>

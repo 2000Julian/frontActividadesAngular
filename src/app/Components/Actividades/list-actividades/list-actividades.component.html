@@ -1,0 +1,29 @@
+
+<h2>Lista de actividades</h2>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Empleado Designado</th>
+            <th>Fecha Finalización Estimada</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor= "let actividad of actividades">
+            <td>{{ actividad.id_actividad}}</td>
+            <td>{{ actividad.descripcion}}</td>
+            <td>{{ actividad.estado}}</td>
+            <td>{{ actividad.empleadoId.nombre + ' '+actividad.empleadoId.apellidos }}</td>
+            <td>{{ actividad.fechaEstimada}}</td>
+            <td> 
+                <button (click)="actualizarActividad(actividad.id_actividad)" class="btn btn-info">Editar</button>
+                <button (click)="eliminarActividad(actividad.id_actividad)" class="btn btn-danger" style="margin-left: 10px;">Eliminar actividad</button>
+                <button (click)="verDetallesDeLaActividad(actividad.id_actividad)" class="btn btn-primary" style="margin-left: 10px;">Ver detalles</button>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
